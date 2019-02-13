@@ -9,6 +9,10 @@ class AdminBaseController extends AdminController {
 
     public function beforeAction($action) {
         $this->enableCsrfValidation = false;
+        Yii::warning($action->id);
+        if (in_array($action->id, ['add-portal-auth'])) {
+            return parent::beforeAction($action);
+        }
 
         $request = Yii::$app->request;
         //Yii::warning($request);
@@ -27,11 +31,13 @@ class AdminBaseController extends AdminController {
         $session['AccessParams'] = $arAccessParams;
         return parent::beforeAction($action);
     }
-    
+
     public function actionInstall() {
+        
     }
 
-    public function actionIndex() {        
+    public function actionIndex() {
+        
     }
 
 }
