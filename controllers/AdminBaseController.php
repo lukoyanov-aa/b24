@@ -36,13 +36,7 @@ class AdminBaseController extends AdminController {
     }
 
     public function actionInstall() {
-        $request = Yii::$app->request;
-        $issetPortal = $this->isSetB24portal($request->get('DOMAIN'));
-        if ($issetPortal) {
-            return $this->render('index');
-        } else {
-            return $this->render('install');
-        }
+            return $this->render('install');        
     }
 
     public function actionIndex() {

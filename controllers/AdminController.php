@@ -4,7 +4,6 @@ namespace app\modules\b24\controllers;
 
 use Yii;
 use \yii\web\HttpException;
-use app\modules\b24\models\B24portal;
 use app\modules\b24\controllers\B24Controller;
 
 class AdminController extends B24Controller {
@@ -28,11 +27,4 @@ class AdminController extends B24Controller {
             throw new HttpException(404, 'Приложение необходимо запустить из портала Битрикс24');
         }
     }
-
-    protected function isSetB24portal($portal) {
-        $model = new B24portal();
-        $issetPortal = $model->isSetB24portal($portal);
-        return $issetPortal;
-    }
-
 }
