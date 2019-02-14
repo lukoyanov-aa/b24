@@ -8,12 +8,15 @@ use \yii\web\HttpException;
 class AdminBaseController extends AdminController {
 
     public function beforeAction($action) {
-        $this->enableCsrfValidation = false;
-        Yii::warning($action->id);
+        $this->enableCsrfValidation = false;        
         if (in_array($action->id, ['add-portal-auth'])) {
             return parent::beforeAction($action);
         }
-
+        
+        $session = Yii::$app->session;
+        if($session['AccessParams']){
+            return parent::beforeAction($action);
+        }
         $request = Yii::$app->request;
         //Yii::warning($request);
 
@@ -26,7 +29,7 @@ class AdminBaseController extends AdminController {
         if ($errors) {
             throw new HttpException(403, 'В доступе отказано');
         }
-        $session = Yii::$app->session;
+        
         $session->set('accessAllowed', true);
         $session['AccessParams'] = $arAccessParams;
         return parent::beforeAction($action);
